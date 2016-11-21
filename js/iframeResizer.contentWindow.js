@@ -1046,6 +1046,11 @@
 			log(' --');
 		}
 
+		function isChildMsg(){
+			var parts = event.data.split(':');
+			return ['interval', 'mutationObserver'].indexOf(parts[parts.length - 1]) > -1;
+		}
+
 		function isInitMsg(){
 			//Test if this message is from a child below us. This is an ugly test, however, updating
 			//the message format would break backwards compatibity.
@@ -1071,7 +1076,7 @@
 				pageInfoFromParent();
 				break;
 			default:
-				if (!isMiddleTier() && !isInitMsg()){
+				if (!isMiddleTier() && !isInitMsg() && !isChildMsg()){
 					warn('Unexpected message ('+event.data+')');
 				}
 			}
