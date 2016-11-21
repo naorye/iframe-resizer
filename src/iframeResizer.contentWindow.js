@@ -1047,8 +1047,8 @@
 		}
 
 		function isChildMsg(){
-			var parts = event.data.split(':');
-			return ['interval', 'mutationObserver'].indexOf(parts[parts.length - 1]) > -1;
+			return typeof event.data === 'string' &&
+				event.data.indexOf(msgID + myID) === 0;
 		}
 
 		function isInitMsg(){
